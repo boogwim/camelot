@@ -63,7 +63,10 @@ class LazyProxy(list):
         dictionary.
         """
         try:
-            return getattr( self, name )
+            found = getattr( self, name )
+            if not found:
+                return default
+            return found
         except AttributeError:
             return default
         
